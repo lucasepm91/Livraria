@@ -1,0 +1,87 @@
+﻿@model SimpleBooks.Models.AutorViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h3>@Model.Nome</h3>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt style="text-align:left" ;>
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataNascimento)
+        </dd>
+        <dt style="text-align:left" ;>
+            @Html.DisplayNameFor(model => model.Biografia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Biografia)
+        </dd>
+    </dl>
+</div>
+
+@if (@ViewBag.Livros != null)
+{
+    <h4>Livros:</h4>
+
+    <table class="table table-hover table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    Título
+                </th>
+                <th>
+                    Nota (0-5)
+                </th>
+                <th>
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (LivroViewModel livro in @ViewBag.Livros)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(LivroViewModel => livro.Titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(LivroViewModel => livro.Nota)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "edit", "livro", new { autorId = Model.Id, livro.Id }, null) |
+                        @Html.ActionLink("Detalhes", "details", "livro", new { autorId = Model.Id, livro.Id }, null) |
+                        @Html.ActionLink("Deletar", "delete", "livro", new { autorId = Model.Id, livro.Id, livro }, null)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        @Html.ActionLink("Editar autor", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Adicionar livro", "create", "livro", new { autorId = Model.Id }, null) |
+        @Html.ActionLink("Voltar para lista de autores", "index", "autor", null, null)
+    </div>
+}
+else
+{
+    <div>
+        <div>
+            <p>
+                Nenhum livro encontrado.
+            </p>
+            <p>
+                Deseja adicionar o primeiro livro?
+            </p>
+            <p>
+                @Html.ActionLink("Adicionar livro", "create", "livro", new { autorId = Model.Id }, null) |
+                @Html.ActionLink("Voltar para lista de autores", "index", "autor", null, null)
+            </p>
+        </div>
+    </div>
+}

@@ -1,0 +1,42 @@
+﻿@model SimpleBooks.Models.LivroViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Quer mesmo deletar esse livro?</h3>
+<div>    
+    <h4>@Html.DisplayFor(model => model.Titulo)</h4>
+    <hr />
+    <dl class="dl-horizontal"> 
+        <dt style="text-align:left" ;>
+            @Html.DisplayNameFor(model => model.Ano)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ano)
+        </dd>
+        <dt style="text-align:left" ;>
+            @Html.DisplayNameFor(model => model.Paginas)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paginas)
+        </dd>
+        <dt style="text-align:left" ;>
+            @Html.DisplayNameFor(model => model.Nota)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nota)
+        </dd>
+        <dt style="text-align:left" ;>
+            @Html.DisplayNameFor(model => model.Resumo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Resumo)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Deletar" class="btn btn-default" />      
+        @Html.ActionLink("Voltar para lista de autores", "index", "autor", null, null)
+    </form>
+</div>
